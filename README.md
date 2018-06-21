@@ -1,3 +1,2 @@
 # MxOnline
-Django学习，实战项目一
-仿照在线视频学习网站
+Django学习，实战项目一 django+xadmin打造在线视频教育网站
