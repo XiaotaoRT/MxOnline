@@ -8,6 +8,7 @@ from DjangoUeditor.models import UEditorField
 from DjangoUeditor.widgets import UEditorWidget
 from django.conf import settings
 
+
 class XadminUEditorWidget(UEditorWidget):
     def __init__(self, **kwargs):
         self.ueditor_options = kwargs
@@ -31,6 +32,7 @@ class UEditorPlugin(BaseAdminPlugin):
         js = '<script type="text/javascript" src="%s"></script>' % (settings.STATIC_URL + "ueditor/ueditor.config.js")
         js += '<script type="text/javascript" src="%s"></script>' % (settings.STATIC_URL + "ueditor/ueditor.all.min.js")
         nodes.append(js)
+
 
 xadmin.site.register_plugin(UEditorPlugin, UpdateAdminView)
 xadmin.site.register_plugin(UEditorPlugin, CreateAdminView)

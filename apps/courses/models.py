@@ -10,7 +10,8 @@ class Courses(models.Model):
     course_org = models.ForeignKey(CourseOrg, verbose_name=u"课程机构", null=True, blank=True)
     name = models.CharField(max_length=50, verbose_name=u"课程名")
     desc = models.CharField(max_length=300, verbose_name=u"课程描述")
-    detail = UEditorField(u'课程详情', width=600, height=300, imagePath="course/ueditor/", filePath="course/ueditor/", blank=True, default='')
+    detail = UEditorField(verbose_name=u'课程详情', width=600, height=300, imagePath="course/ueditor/",
+                          filePath="course/ueditor/", blank=True, default='')
     is_banner = models.BooleanField(default=False, verbose_name=u"是否轮播")
     degree = models.CharField(choices=(("cj", "初级"), ("zj", "中级"), ("gj", "高级")), max_length=2, verbose_name=u"难度")
     learn_time = models.IntegerField(default=0, verbose_name=u"学习时长(分钟)")
