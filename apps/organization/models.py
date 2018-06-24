@@ -2,13 +2,14 @@
 
 from django.db import models
 from datetime import datetime
+from DjangoUeditor.models import UEditorField
 # Create your models here.
 
 
 class CityDict(models.Model):
     name = models.CharField(max_length=20, verbose_name=u"城市")
     desc = models.CharField(max_length=200, verbose_name=u"描述")
-    add_time = models.DateTimeField(default=datetime.now)
+    add_time = models.DateTimeField(default=datetime.now,verbose_name=u"添加时间")
 
     class Meta:
         verbose_name = u"城市"
@@ -21,7 +22,8 @@ class CityDict(models.Model):
 class CourseOrg(models.Model):
     name = models.CharField(max_length=50, verbose_name=u"机构名称")
     tag = models.CharField(max_length=4, verbose_name=u"机构标签", default=u"全国知名")
-    desc = models.TextField(verbose_name=u"机构描述")
+    desc = UEditorField(verbose_name=u'课程详情', width=600, height=300, imagePath="courseOrg/ueditor/",
+                          filePath="courseOrg/ueditor/", blank=True, default='')
     category = models.CharField(max_length=20, choices=(("pxjg", "培训机构"), ("gr", "个人"), ("gx", "高校")), verbose_name=u"机构类别", default="pxjg")
     click_nums = models.IntegerField(default=0, verbose_name=u"点击数")
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏数")

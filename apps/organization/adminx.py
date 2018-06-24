@@ -15,6 +15,7 @@ class CourseOrgAdmin(object):
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'image', 'address', 'city', 'add_time']
     # 设在外键上
     #relfields_style = 'fk-ajax'
+    style_fields = {"desc": "ueditor"}
 
 
 class TeacherAdmin(object):
