@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from operation.models import UserFavorite, CourseComments, UserCourse
+from organization.models import CourseOrg
 from .models import Courses, CourseResource, Video
 from utils.mixin_utils import LoginRequiredMixin
 # Create your views here.
@@ -79,6 +80,7 @@ class CourseInfoView(LoginRequiredMixin, View):
     课程章节信息
     """
     def get(self, request, course_id):
+
         course = Courses.objects.get(id=int(course_id))
 
         # 查询用户是否已经关联了该课程
@@ -88,6 +90,10 @@ class CourseInfoView(LoginRequiredMixin, View):
             user_cour.save()
             course.students += 1
             course.save()
+            # 课程机构关联学习人数
+            course_org = CourseOrg.objects.get(id=course.course_org.id)
+            course_org.students += 1
+            course_org.save()
 
         # 取出所有学过该课程的用户
         user_courses = UserCourse.objects.filter(course=course)

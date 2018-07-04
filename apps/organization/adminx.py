@@ -17,6 +17,15 @@ class CourseOrgAdmin(object):
     #relfields_style = 'fk-ajax'
     style_fields = {"desc": "ueditor"}
 
+    def save_models(self):
+        # 在保存课程的时候统计课程机构的课程数
+        obj = self.new_obj
+        obj.save()
+        if obj.course_org is not None:
+            course_org = obj.course_org
+            course_org.course_nums = CourseOrg.objects.filter(course_org=course_org).count()
+            course_org.save()
+
 
 class TeacherAdmin(object):
     list_display = ['org', 'name', 'work_years', 'work_company', 'work_position', 'points', 'click_nums', 'fav_nums', 'add_time']

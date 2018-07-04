@@ -49,6 +49,7 @@ class OrgView(View):
                 all_orgs = all_orgs.order_by("-course_nums")
 
         org_nums = all_orgs.count()
+
         # 对课程机构进行分页
         try:
             page = request.GET.get('page', 1)
@@ -110,7 +111,10 @@ class OrgCourseView(View):
 
     def get(self, request, org_id):
         current_page = "course"
-        course_org = CourseOrg.objects.get(id=int(org_id))
+        if int(org_id) > 0:
+            course_org = CourseOrg.objects.get(id=int(org_id))
+        else:
+            course_org = CourseOrg.objects.all()
         has_fav = False
         if request.user.is_authenticated():
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):

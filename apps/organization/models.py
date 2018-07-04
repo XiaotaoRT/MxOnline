@@ -41,6 +41,9 @@ class CourseOrg(models.Model):
     def get_teacher_nums(self):
         return self.teacher_set.all().count()
 
+    def get_jdcourse(self):
+        return self.courses_set.order_by("-click_nums")[:3]
+
     def __str__(self):
         return self.name
 
